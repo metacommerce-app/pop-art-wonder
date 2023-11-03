@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { MintContext, MintContextProps, MintState } from '@/client/home/useMint';
-import { useContractWrite, useDisconnect, useWaitForTransaction } from 'wagmi';
-import { NftABI } from './nft/NftAbi';
+import { useContractWrite } from 'wagmi';
 import { config } from '@/client/types/config';
 import { useNftDetails } from '../client/home/useNftDetails';
 import { waitForTransaction } from 'wagmi/actions';
+import { NftABI } from './nft/NftABI';
 
 interface MintProviderProps {
   children: React.ReactNode | React.ReactNode[];
