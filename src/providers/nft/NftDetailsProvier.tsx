@@ -7,7 +7,7 @@ import { config } from '@/client/types/config';
 import testsnapshot from './test.json';
 import NftABI from './NftABI';
 
-const CURRENT_NUMBER_MINTED = 1461;
+const CURRENT_NUMBER_MINTED = 1462;
 const ETH_PRICE_URL = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD';
 interface NftDetailsProviderProps {
   children: React.ReactNode | React.ReactNode[];
