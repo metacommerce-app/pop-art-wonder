@@ -1,0 +1,31 @@
+# Ignore artifacts:
+build
+coverage
+
+.vscode/**
+
+*.js
+!jest.config.js
+!jest-dynamodb-config.js
+*.d.ts
+node_modules
+
+# amplify assets
+amplify
+src/API.ts
+src/aws-exports.js
+src/graphql/**
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+cdk.json
+
+# Custom assets
+bin/**
+config/**
+public/**
+.github/**
+.husky/**
+.hygen/**
+.next/**

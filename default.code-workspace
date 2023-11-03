@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "window.title": "Minting-website-template${separator}${rootName}${separator}${activeEditorShort}",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.rulers": [132, 200],
+    "jest.autoRun": "off",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+  },
+  "extensions": {
+    "recommendations": ["orta.vscode-jest", "mquandalle.graphql", "editorconfig.editorconfig", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "cab404.vscode-direnv"]
+  }
+}
