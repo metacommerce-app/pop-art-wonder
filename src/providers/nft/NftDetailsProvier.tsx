@@ -5,7 +5,7 @@ import { GasDetails, NftDetailsContext, NftDetailsContextProps, VoucherData } fr
 import { useAccount, useContractRead, usePublicClient } from 'wagmi';
 import { config } from '@/client/types/config';
 import testsnapshot from './test.json';
-import { NftABI } from './NftAbi';
+import NftABI from './NftABI';
 
 const CURRENT_NUMBER_MINTED = 1461;
 const ETH_PRICE_URL = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD';

@@ -1,4 +1,4 @@
-export const NftABI = [
+const NftABI = [
   {
     inputs: [
       {
@@ -87,3 +87,4 @@ export const NftABI = [
     type: 'function',
   },
 ];
+export default NftABI;
