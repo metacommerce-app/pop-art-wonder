@@ -11,7 +11,6 @@ interface MintingButtonProps {
 
 const MintingButton: React.FC<MintingButtonProps> = ({ className }) => {
   const { t } = useTranslation();
-  const { mintState } = useMint();
   const [open, setOpen] = useState(false);
 
   const openModal = () => setOpen(true);
