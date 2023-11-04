@@ -17,7 +17,12 @@ const MintComplete: React.FC<ConnectButtonProps> = ({ className }) => {
         <Confetti></Confetti>
         <Image src='/the-evolution-of-art.png' alt='Hero image' className='dark:invert rounded-2xl' layout='fill' objectFit='cover' priority />
       </div>
-      <div className='font-medium'>{t('Congrats on minting your new wonder!')}</div>
+      <div className='text-center'>
+        <div className='font-medium'>{t('Congrats on minting your new wonder!')}</div>
+        <a className='hover:underline hover:text-pink-400' href='https://opensea.io/collection/popartwonders'>
+          Check out the collection on OpenSea!
+        </a>
+      </div>
     </div>
   );
 };
