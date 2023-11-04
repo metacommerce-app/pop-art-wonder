@@ -12,6 +12,7 @@ export const config = {
   },
   chain: 'mainnet',
   chainId: 1,
+  infuraId: process.env.NEXT_PUBLIC_INFURA_ID!,
   walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID!,
   alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY!,
 };

@@ -8,13 +8,14 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, goerli, sepolia } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { infuraProvider } from 'wagmi/providers/infura';
 import { publicProvider } from 'wagmi/providers/public';
 import AuthProvider from '@/providers/AuthProvider';
 import Head from 'next/head';
 import { config } from '@/client/types/config';
 import NftDetailsProvider from '@/providers/nft/NftDetailsProvier';
 import MintProvider from '@/providers/MintProvider';
-const { chains, publicClient } = configureChains([mainnet, goerli, sepolia], [alchemyProvider({ apiKey: config.alchemyId }), publicProvider()]);
+const { chains, publicClient } = configureChains([mainnet, goerli, sepolia], [infuraProvider({ apiKey: config.infuraId }), alchemyProvider({ apiKey: config.alchemyId }), publicProvider()]);
 
 const { connectors } = getDefaultWallets({ appName: config.appName, projectId: config.walletConnectProjectId, chains });
 
