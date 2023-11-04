@@ -12,31 +12,32 @@ interface MintButtonProps {
 }
 
 const MintButton: React.FC<MintButtonProps> = ({ numberOfItems, className }) => {
-  const { address } = useAuth();
   const { t } = useTranslation();
   const { isEligable } = useNftDetails();
+  const { address } = useAuth();
   const { mint } = useMint();
 
   const handleOnClick = async () => {
     await mint();
   };
 
+  if (!address) {
+    return <ConnectButton></ConnectButton>;
+  }
+
   return (
-    <>
-      <DisplayIf condition={!address}>
-        <ConnectButton></ConnectButton>
-      </DisplayIf>
-      <DisplayIf condition={!isEligable && !!address}>
+    <DisplayIf
+      condition={isEligable}
+      falsy={
         <Button onClick={() => {}} className={`w-full border border-gray-500 p-2 bg-gray-600 text-white !rounded-md ${className}`}>
           {t('Ineligible For Mint')}
         </Button>
-      </DisplayIf>
-      <DisplayIf condition={!!isEligable && !!address}>
-        <Button onClick={handleOnClick} className={`w-full border border-gray-500 p-2 bg-gray-900 text-white !rounded-md ${className}`}>
-          {t('Mint')}
-        </Button>
-      </DisplayIf>
-    </>
+      }
+    >
+      <Button onClick={handleOnClick} className={`w-full border border-gray-500 p-2 bg-gray-900 text-white !rounded-md ${className}`}>
+        {t('Mint')}
+      </Button>
+    </DisplayIf>
   );
 };
 
