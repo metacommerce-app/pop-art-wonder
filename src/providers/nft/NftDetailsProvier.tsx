@@ -14,6 +14,7 @@ interface NftDetailsProviderProps {
 }
 
 const NftDetailsProvider: React.FC<NftDetailsProviderProps> = ({ children }) => {
+  //
   const [totalMinted, setTotalMinted] = useState<number>(0);
   const { estimateContractGas, getGasPrice, readContract } = usePublicClient();
   const [gas, setGas] = useState<GasDetails>({});
