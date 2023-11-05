@@ -1,6 +1,20 @@
 {
   "allowlist": [
     {
+      "address": "0xB65E6aA60A7aBB93CA4AcC15DFd2e81bE5AC5eac",
+      "amount": 5,
+      "voucher": {
+        "signature": "0x512690884ea74969a5e4be7b079286ba74c1263abfe4012f860a92d1d65f40b519d70b83ad62ab97f6f3c35bce0fcc0af985c30674b13a50c2d6cfb23d115e151b",
+        "cost": 0,
+        "ref": "",
+        "recipient": "0xB65E6aA60A7aBB93CA4AcC15DFd2e81bE5AC5eac",
+        "limit": 100000,
+        "nonce": 5,
+        "fee": 0,
+        "amount": 5
+      }
+    },
+    {
       "address": "0x3166948EE84677FdC85D6626870e5c4Ab94f8Eb7",
       "amount": 1,
       "voucher": {
