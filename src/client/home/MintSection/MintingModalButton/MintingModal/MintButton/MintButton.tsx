@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import ConnectButton from './ConnectButton';
 import { useNftDetails } from '@/client/home/useNftDetails';
 import { useMint } from '@/client/home/useMint';
+import { EngageEventTypes, useEngage } from '@/client/home/useEngage';
 interface MintButtonProps {
   numberOfItems: number;
   className?: string;
@@ -16,7 +17,7 @@ const MintButton: React.FC<MintButtonProps> = ({ numberOfItems, className }) => 
   const { isEligable } = useNftDetails();
   const { address } = useAuth();
   const { mint } = useMint();
-
+  const { publishEvent } = useEngage();
   const handleOnClick = async () => {
     await mint();
   };
@@ -29,7 +30,14 @@ const MintButton: React.FC<MintButtonProps> = ({ numberOfItems, className }) => 
     <DisplayIf
       condition={isEligable}
       falsy={
-        <Button onClick={() => {}} className={`w-full border border-gray-500 p-2 bg-gray-600 text-white !rounded-md ${className}`}>
+        <Button
+          onClick={() => {
+            publishEvent(EngageEventTypes.ClickedIneligibleForMint, {
+              walletAddress: address,
+            });
+          }}
+          className={`w-full border border-gray-500 p-2 bg-gray-600 text-white !rounded-md ${className}`}
+        >
           {t('Ineligible For Mint')}
         </Button>
       }

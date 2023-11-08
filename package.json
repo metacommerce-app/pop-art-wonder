@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@metacommerce-app/engage-js": "^1.11.0",
     "@rainbow-me/rainbowkit": "^1.1.3",
     "dayjs": "^1.11.10",
     "next": "14.0.0",
