@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import DisplayIf from '../components/conditionals/DisplayIf';
 import { AuthContext, AuthContextProps } from '@/client/home/useAuth';
 import PageSpinner from '@/components/spinners/PageSpinner';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { EngageEventTypes, useEngage } from '@/client/home/useEngage';
 
 interface AuthProviderProps {
   children: React.ReactNode | React.ReactNode[];
@@ -14,10 +15,16 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { disconnectAsync, isLoading } = useDisconnect();
 
   const { openConnectModal } = useConnectModal();
-
+  const { publishEvent } = useEngage();
   const logout = async () => {
     await disconnectAsync();
   };
+
+  useEffect(() => {
+    if (address) {
+      publishEvent(EngageEventTypes.ConnectedWallet, { walletAddress: address });
+    }
+  }, [address]);
 
   const wrapper: AuthContextProps = useMemo(
     () => ({

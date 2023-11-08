@@ -5,6 +5,7 @@ import { config } from '@/client/types/config';
 import { useNftDetails } from '../client/home/useNftDetails';
 import { waitForTransaction } from 'wagmi/actions';
 import NftABI from './nft/NftABI';
+import { EngageEventTypes, useEngage } from '@/client/home/useEngage';
 
 interface MintProviderProps {
   children: React.ReactNode | React.ReactNode[];
@@ -12,6 +13,7 @@ interface MintProviderProps {
 
 const MintProvider: React.FC<MintProviderProps> = ({ children }) => {
   const { voucher } = useNftDetails();
+  const { publishEvent } = useEngage();
   const [mintState, setMintstate] = useState<MintState>(MintState.NotStarted);
   const [txHash, setTxHash] = useState<string | null>(null);
   const { writeAsync } = useContractWrite({
@@ -29,6 +31,7 @@ const MintProvider: React.FC<MintProviderProps> = ({ children }) => {
       const txHash = tx.hash;
       setTxHash(txHash);
       const receipt = await waitForTransaction({ hash: txHash as any, chainId: config.chainId });
+      publishEvent(EngageEventTypes.WhitelistMinted, { txHash, walletAddress: voucher?.recipient, amount: voucher?.amount });
       setMintstate(MintState.Completed);
     } catch (error) {
       console.error(error);

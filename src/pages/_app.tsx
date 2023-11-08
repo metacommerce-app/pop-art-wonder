@@ -14,6 +14,7 @@ import Head from 'next/head';
 import { config } from '@/client/types/config';
 import NftDetailsProvider from '@/providers/nft/NftDetailsProvier';
 import MintProvider from '@/providers/MintProvider';
+import EngageProvider from '@/providers/EngageProvider';
 const { chains, publicClient } = configureChains([mainnet, goerli, sepolia], [alchemyProvider({ apiKey: config.alchemyId }), publicProvider()]);
 
 const { connectors } = getDefaultWallets({ appName: config.appName, projectId: config.walletConnectProjectId, chains });
@@ -26,18 +27,20 @@ const wagmiConfig = createConfig({ autoConnect: true, connectors, publicClient }
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
-        <AuthProvider>
-          <NftDetailsProvider>
-            <MintProvider>
-              <Head>
-                <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' rel='stylesheet' />
-              </Head>
-              <Component {...pageProps} />
-            </MintProvider>
-          </NftDetailsProvider>
-        </AuthProvider>
-      </RainbowKitProvider>
+      <EngageProvider>
+        <RainbowKitProvider chains={chains}>
+          <AuthProvider>
+            <NftDetailsProvider>
+              <MintProvider>
+                <Head>
+                  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' rel='stylesheet' />
+                </Head>
+                <Component {...pageProps} />
+              </MintProvider>
+            </NftDetailsProvider>
+          </AuthProvider>
+        </RainbowKitProvider>
+      </EngageProvider>
     </WagmiConfig>
   );
 }

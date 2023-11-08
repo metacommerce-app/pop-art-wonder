@@ -14,4 +14,5 @@ export const config = {
   chainId: 1,
   walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID!,
   alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY!,
+  engageJsApiKey: process.env.NEXT_PUBLIC_ENGAGE_JS_API_KEY!,
 };
