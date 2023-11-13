@@ -5,7 +5,7 @@ export const config = {
   contractAddress: '0xbba45e5b08233014fa676b1cd9345e58bda2582e',
   openseaUrl: 'https://opensea.io/collection/popartwonders',
   startDate: '2023-11-04T16:30:04.000Z',
-  endDate: '2023-11-14T16:00:05.000Z',
+  endDate: '2023-11-14T17:00:05.000Z',
   twitter: {
     url: 'https://twitter.com/popartcats',
     handle: '@popartcats',
