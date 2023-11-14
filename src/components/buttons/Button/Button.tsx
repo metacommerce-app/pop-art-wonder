@@ -2,13 +2,14 @@ import React from 'react';
 
 interface ButtonProps {
   children: string | React.ReactNode | React.ReactNode[];
-  onClick: () => void;
+  disabled?: boolean;
+  onClick?: () => void;
   className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, className }) => {
+const Button: React.FC<ButtonProps> = ({ children, disabled, onClick, className }) => {
   return (
-    <button onClick={onClick} className={`w-full rounded-xl ${className}`}>
+    <button disabled={disabled} onClick={onClick} className={`w-full rounded-xl ${className}`}>
       {children}
     </button>
   );

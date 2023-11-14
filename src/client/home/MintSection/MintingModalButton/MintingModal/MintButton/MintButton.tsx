@@ -18,6 +18,7 @@ const MintButton: React.FC<MintButtonProps> = ({ numberOfItems, className }) => 
   const { address } = useAuth();
   const { mint } = useMint();
   const { publishEvent } = useEngage();
+  
   const handleOnClick = async () => {
     await mint();
   };

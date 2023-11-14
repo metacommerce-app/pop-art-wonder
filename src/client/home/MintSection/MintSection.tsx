@@ -29,12 +29,6 @@ const MintSection: React.FC<MintSectionProps> = ({ className }) => {
         <InfoSection />
         <Divider />
         <CountdownSection />
-        <Divider />
-        <DisplayIf condition={!isStarted || isFinished}>
-          <div className={`group bg-gray-400 flex flex-row items-center p-4 w-full rounded-md ${className}`}>
-            <div className='flex'>{t('Mint has not started')}</div>
-          </div>
-        </DisplayIf>
         <DisplayIf condition={isStarted}>
           <MintingButton className='mt-4' />
         </DisplayIf>
