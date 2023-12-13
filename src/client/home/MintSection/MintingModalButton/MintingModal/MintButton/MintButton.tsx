@@ -3,10 +3,11 @@ import DisplayIf from '@/components/conditionals/DisplayIf';
 import { useAuth } from '@/client/home/useAuth';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import ConnectButton from './ConnectButton';
+import ConnectButton from '../../../../../../components/buttons/Button/ConnectButton';
 import { useNftDetails } from '@/client/home/useNftDetails';
 import { useMint } from '@/client/home/useMint';
-import { EngageEventTypes, useEngage } from '@/client/home/useEngage';
+import IneligibleMintForm from './IneligibleMintForm/IneligibleMintForm';
+import PrimaryButton from '@/components/buttons/Button/PrimaryButton';
 interface MintButtonProps {
   numberOfItems: number;
   className?: string;
@@ -17,7 +18,6 @@ const MintButton: React.FC<MintButtonProps> = ({ numberOfItems, className }) => 
   const { isEligable } = useNftDetails();
   const { address } = useAuth();
   const { mint } = useMint();
-  const { publishEvent } = useEngage();
   
   const handleOnClick = async () => {
     await mint();
@@ -31,21 +31,12 @@ const MintButton: React.FC<MintButtonProps> = ({ numberOfItems, className }) => 
     <DisplayIf
       condition={isEligable}
       falsy={
-        <Button
-          onClick={() => {
-            publishEvent(EngageEventTypes.ClickedIneligibleForMint, {
-              walletAddress: address,
-            });
-          }}
-          className={`w-full border border-gray-500 p-2 bg-gray-600 text-white !rounded-md ${className}`}
-        >
-          {t('Ineligible For Mint')}
-        </Button>
+        <IneligibleMintForm/>
       }
     >
-      <Button onClick={handleOnClick} className={`w-full border border-gray-500 p-2 bg-gray-900 text-white !rounded-md ${className}`}>
+      <PrimaryButton onClick={handleOnClick}>
         {t('Mint')}
-      </Button>
+      </PrimaryButton>
     </DisplayIf>
   );
 };

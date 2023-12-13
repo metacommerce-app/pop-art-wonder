@@ -5,12 +5,11 @@ import InfoSection from './InfoSection/InfoSection';
 import CountdownSection from './CountdownSection/CountdownSection';
 import DetailsSection from './DetailsSection/DetailsSection';
 import Footer from './Footer/Footer';
-import MintingButton from './MintingModalButton/MintingModalButton';
+import MintingModalButton from './MintingModalButton/MintingModalButton';
 import DisplayIf from '@/components/conditionals/DisplayIf';
-import { config } from '@/client/types/config';
-import Button from '@/components/buttons/Button/Button';
-import { useTransaction } from 'wagmi';
+import { clientConfig } from '@/client/types/config';
 import { useTranslation } from 'react-i18next';
+import MintCompleteButton from './MintingModalButton/MintCompleteButton';
 
 interface MintSectionProps {
   className?: string;
@@ -19,8 +18,8 @@ interface MintSectionProps {
 const MintSection: React.FC<MintSectionProps> = ({ className }) => {
   const now = new Date();
   const { t } = useTranslation();
-  const isStarted = now.getTime() > new Date(config.startDate).getTime();
-  const isFinished = now.getTime() > new Date(config.endDate).getTime();
+  const isStarted = now.getTime() > new Date(clientConfig.startDate).getTime();
+  const isFinished = now.getTime() > new Date(clientConfig.endDate).getTime();
   return (
     <div className={`flex justify-center flex-col w-full items-center h-full order-2 lg:order-1 ${className}`}>
       <div className='w-full lg:w-4/5'>
@@ -29,8 +28,11 @@ const MintSection: React.FC<MintSectionProps> = ({ className }) => {
         <InfoSection />
         <Divider />
         <CountdownSection />
-        <DisplayIf condition={isStarted}>
-          <MintingButton className='mt-4' />
+        <DisplayIf condition={!isStarted || isFinished}>
+          <MintCompleteButton />
+        </DisplayIf>
+        <DisplayIf condition={isStarted && !isFinished}>
+          <MintingModalButton />
         </DisplayIf>
         <DetailsSection />
         <Footer className='' />

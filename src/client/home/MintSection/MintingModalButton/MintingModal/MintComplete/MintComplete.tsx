@@ -15,7 +15,7 @@ const MintComplete: React.FC<ConnectButtonProps> = ({ className }) => {
     <div className='flex items-center justify-center flex-col gap-4 '>
       <div className='relative w-full h-60 lg:h-96  rounded-2xl border-2 border-sky-950'>
         <Confetti></Confetti>
-        <Image src='/the-evolution-of-art.png' alt='Hero image' className='dark:invert rounded-2xl' layout='fill' objectFit='cover' priority />
+        <Image src='/pop-art-crystals.gif' alt='Hero image' className='dark:invert rounded-2xl' layout='fill' objectFit='cover' priority />
       </div>
       <div className='text-center'>
         <div className='font-medium'>{t('Congrats on minting your new wonder!')}</div>

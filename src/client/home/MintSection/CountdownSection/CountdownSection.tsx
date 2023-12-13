@@ -1,15 +1,15 @@
 import React from 'react';
 import Countdown from './Countdown/Countdown';
 import CountdownTitle from './CountdownTitle/CountdownTitle';
-import { config } from '@/client/types/config';
+import { clientConfig } from '@/client/types/config';
 import IsVisibleWhen from '@/components/conditionals/IsVisibleWhen';
 
 
 const CountdownSection: React.FC = () => {
   const now = new Date();
-  const isStarted = now.getTime() > new Date(config.startDate).getTime()
-  const isFinished = now.getTime() > new Date(config.endDate).getTime()
-  const target = isStarted ? new Date(config.endDate) : new Date(config.startDate)
+  const isStarted = now.getTime() > new Date(clientConfig.startDate).getTime()
+  const isFinished = now.getTime() > new Date(clientConfig.endDate).getTime()
+  const target = isStarted ? new Date(clientConfig.endDate) : new Date(clientConfig.startDate)
 
   return (
     <IsVisibleWhen condition={!isFinished}>

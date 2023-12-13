@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { MintContext, MintContextProps, MintState } from '@/client/home/useMint';
 import { useContractWrite } from 'wagmi';
-import { config } from '@/client/types/config';
+import { clientConfig } from '@/client/types/config';
 import { useNftDetails } from '../client/home/useNftDetails';
 import { waitForTransaction } from 'wagmi/actions';
 import NftABI from './nft/NftABI';
-import { EngageEventTypes, useEngage } from '@/client/home/useEngage';
+import useEngage from '@/hooks/useEngage';
+import { EngageEventTypes } from '@/types/engage';
 
 interface MintProviderProps {
   children: React.ReactNode | React.ReactNode[];
@@ -19,8 +20,8 @@ const MintProvider: React.FC<MintProviderProps> = ({ children }) => {
   const { writeAsync } = useContractWrite({
     abi: NftABI,
     functionName: 'whitelistMint',
-    chainId: config.chainId,
-    address: config.contractAddress as any,
+    chainId: clientConfig.chainId,
+    address: clientConfig.contractAddress as any,
     args: [voucher],
   });
 
@@ -30,7 +31,7 @@ const MintProvider: React.FC<MintProviderProps> = ({ children }) => {
       setMintstate(MintState.Pending);
       const txHash = tx.hash;
       setTxHash(txHash);
-      const receipt = await waitForTransaction({ hash: txHash as any, chainId: config.chainId });
+      const receipt = await waitForTransaction({ hash: txHash as any, chainId: clientConfig.chainId });
       publishEvent(EngageEventTypes.WhitelistMinted, { txHash, walletAddress: voucher?.recipient, amount: voucher?.amount });
       setMintstate(MintState.Completed);
     } catch (error) {

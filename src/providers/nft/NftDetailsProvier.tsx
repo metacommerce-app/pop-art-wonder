@@ -3,12 +3,10 @@ import DisplayIf from '../../components/conditionals/DisplayIf';
 import PageSpinner from '@/components/spinners/PageSpinner';
 import { GasDetails, NftDetailsContext, NftDetailsContextProps, VoucherData } from '../../client/home/useNftDetails';
 import { useAccount, useContractRead, usePublicClient } from 'wagmi';
-import { config } from '@/client/types/config';
+import { clientConfig } from '@/client/types/config';
 import testsnapshot from './test.json';
 import NftABI from './NftABI';
 
-const CURRENT_NUMBER_MINTED = 1462;
-const ETH_PRICE_URL = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD';
 interface NftDetailsProviderProps {
   children: React.ReactNode | React.ReactNode[];
 }
@@ -16,7 +14,7 @@ interface NftDetailsProviderProps {
 const NftDetailsProvider: React.FC<NftDetailsProviderProps> = ({ children }) => {
   //
   const [totalMinted, setTotalMinted] = useState<number>(0);
-  const { estimateContractGas, getGasPrice, readContract } = usePublicClient();
+  const { estimateContractGas, getGasPrice } = usePublicClient();
   const [gas, setGas] = useState<GasDetails>({});
   const { address } = useAccount();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -26,8 +24,8 @@ const NftDetailsProvider: React.FC<NftDetailsProviderProps> = ({ children }) => 
   const { refetch } = useContractRead({
     abi: NftABI,
     functionName: 'totalSupply',
-    address: config.contractAddress as any,
-    chainId: config.chainId,
+    address: clientConfig.contractAddress as any,
+    chainId: clientConfig.chainId,
   });
 
   /*
@@ -36,7 +34,7 @@ const NftDetailsProvider: React.FC<NftDetailsProviderProps> = ({ children }) => 
   useEffect(() => {
     refetch()
       .then((res) => {
-        setTotalMinted(Number(res.data) - CURRENT_NUMBER_MINTED);
+        setTotalMinted(Number(res.data) - clientConfig.numberMinted);
       })
       .catch((err) => {
         console.error(err);
@@ -49,14 +47,14 @@ const NftDetailsProvider: React.FC<NftDetailsProviderProps> = ({ children }) => 
       try {
         const res = await getGasPrice();
         const gas = await estimateContractGas({
-          address: config.contractAddress as any,
+          address: clientConfig.contractAddress as any,
           abi: NftABI,
           functionName: 'whitelistMint',
           args: [voucher],
           account: address as any,
         });
 
-        const req = await fetch(ETH_PRICE_URL, { method: 'GET' });
+        const req = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD', { method: 'GET' });
         const price = (await req.json()) as any;
         const costInEth = (Number(res) * Number(gas)) / 10 ** 9 / 10 ** 9;
 
