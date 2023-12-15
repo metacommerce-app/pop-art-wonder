@@ -11,13 +11,12 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import AuthProvider from '@/providers/AuthProvider';
 import Head from 'next/head';
-import { config } from '@/client/types/config';
+import { clientConfig } from '@/client/types/config';
 import NftDetailsProvider from '@/providers/nft/NftDetailsProvier';
 import MintProvider from '@/providers/MintProvider';
-import EngageProvider from '@/providers/EngageProvider';
-const { chains, publicClient } = configureChains([mainnet, goerli, sepolia], [alchemyProvider({ apiKey: config.alchemyId }), publicProvider()]);
+const { chains, publicClient } = configureChains([mainnet, goerli, sepolia], [alchemyProvider({ apiKey: clientConfig.alchemyId }), publicProvider()]);
 
-const { connectors } = getDefaultWallets({ appName: config.appName, projectId: config.walletConnectProjectId, chains });
+const { connectors } = getDefaultWallets({ appName: clientConfig.appName, projectId: clientConfig.walletConnectProjectId, chains });
 
 const wagmiConfig = createConfig({ autoConnect: true, connectors, publicClient });
 
@@ -27,7 +26,6 @@ const wagmiConfig = createConfig({ autoConnect: true, connectors, publicClient }
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <EngageProvider>
         <RainbowKitProvider chains={chains}>
           <AuthProvider>
             <NftDetailsProvider>
@@ -40,7 +38,6 @@ export default function App({ Component, pageProps }: AppProps) {
             </NftDetailsProvider>
           </AuthProvider>
         </RainbowKitProvider>
-      </EngageProvider>
     </WagmiConfig>
   );
 }

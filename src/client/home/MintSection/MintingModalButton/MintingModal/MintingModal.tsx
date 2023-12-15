@@ -3,11 +3,9 @@ import React, { use, useEffect, useState } from 'react';
 import NumberOfItemsSelector from './NumberOfItemsSelector/NumberOfItemsSelector';
 import OrderDetails from './OrderDetails/OrderDetails';
 import MintButton from './MintButton/MintButton';
-import WalletDetails from './WalletDetails/WalletDetails';
 import { useNftDetails } from '@/client/home/useNftDetails';
 import { MintState, useMint } from '@/client/home/useMint';
 import DisplayIf from '@/components/conditionals/DisplayIf';
-import { ThreeDots } from 'react-loader-spinner';
 import MintLoader from './MintLoader/MintLoader';
 import MintComplete from './MintComplete/MintComplete';
 
@@ -17,7 +15,7 @@ interface CheckoutModalProps {
 }
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ open, onClose }) => {
-  const [numberOfItems, setNumberOfItems] = useState(0);
+  const [ numberOfItems, setNumberOfItems ] = useState(0);
   const { voucher } = useNftDetails();
   const { mintState } = useMint();
 
@@ -37,7 +35,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ open, onClose }) => {
       <DisplayIf condition={mintState !== MintState.Completed && mintState !== MintState.Pending}>
         <NumberOfItemsSelector isDisabled={true} numberOfItems={numberOfItems} onChange={handleChange} />
         <OrderDetails numberOfItems={numberOfItems} className='mb-4 ' />
-        <WalletDetails className='mt-4' />
         <MintButton numberOfItems={numberOfItems} className='mt-5' />
       </DisplayIf>
       <DisplayIf condition={mintState === MintState.Completed}>

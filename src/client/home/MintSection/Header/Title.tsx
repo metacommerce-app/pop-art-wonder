@@ -1,4 +1,4 @@
-import { config } from '@/client/types/config';
+import { clientConfig } from '@/client/types/config';
 import React from 'react';
 
 interface TitleProps {
@@ -8,7 +8,7 @@ interface TitleProps {
 const Title: React.FC<TitleProps> = ({ className }) => {
   return (
     <div className={`font-bold text-4xl text-gray-800 ${className}`}>
-      { config.appName }
+      { clientConfig.appName }
     </div>
   );
 };

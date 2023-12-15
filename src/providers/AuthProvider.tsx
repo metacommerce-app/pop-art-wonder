@@ -4,7 +4,8 @@ import { AuthContext, AuthContextProps } from '@/client/home/useAuth';
 import PageSpinner from '@/components/spinners/PageSpinner';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
-import { EngageEventTypes, useEngage } from '@/client/home/useEngage';
+import { EngageEventTypes } from '@/types/engage';
+import useEngage from '@/hooks/useEngage';
 
 interface AuthProviderProps {
   children: React.ReactNode | React.ReactNode[];
@@ -21,7 +22,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    if (address) {
+    if (!!address) {
       publishEvent(EngageEventTypes.ConnectedWallet, { walletAddress: address });
     }
   }, [address]);

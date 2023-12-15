@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ButtonProps {
+export interface ButtonProps {
   children: string | React.ReactNode | React.ReactNode[];
   disabled?: boolean;
   onClick?: () => void;

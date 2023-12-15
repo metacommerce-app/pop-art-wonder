@@ -1,5 +1,5 @@
 import { toParsedAddress } from '@/client/home/utils';
-import { config } from '@/client/types/config';
+import { clientConfig } from '@/client/types/config';
 import Link from 'next/link';
 import React from 'react';
 
@@ -9,9 +9,9 @@ interface EtherscanLinkProps {
 
 const EtherscanLink: React.FC<EtherscanLinkProps> = ({ className }) => {
   return (
-    <Link href={`https://etherscan.io/address/${config.contractAddress}`}>
+    <Link href={`https://etherscan.io/address/${clientConfig.contractAddress}`}>
       <div className={`hover:underline hover:text-blue-700 ${className}`}>
-        {toParsedAddress(config.contractAddress)}
+        {toParsedAddress(clientConfig.contractAddress)}
       </div>
     </Link>
   );

@@ -2,13 +2,10 @@ import Button from '@/components/buttons/Button/Button';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CheckoutModal from './MintingModal/MintingModal';
-import { FaArrowRight } from 'react-icons/fa';
+import PrimaryButton from '@/components/buttons/Button/PrimaryButton';
 
-interface MintingButtonProps {
-  className?: string;
-}
 
-const MintingButton: React.FC<MintingButtonProps> = ({ className }) => {
+const MintingModalButton: React.FC = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -20,13 +17,12 @@ const MintingButton: React.FC<MintingButtonProps> = ({ className }) => {
    */
   return (
     <>
-      <Button disabled={true} className={`group bg-gray-700 text-white flex flex-row items-center p-4 w-full rounded-md  ${className}`}>
-        <div className='flex'>{t('Minting is closed')}</div>
-        <div className='flex flex-grow'></div>
-      </Button>
+      <PrimaryButton className='hover:bg-pink-500 text-left' onClick={openModal}>
+        {t('Minting Now')}
+      </PrimaryButton>
       <CheckoutModal open={open} onClose={closeModal} />
     </>
   );
 };
 
-export default MintingButton;
+export default MintingModalButton;
