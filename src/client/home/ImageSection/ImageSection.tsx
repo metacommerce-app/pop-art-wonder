@@ -12,7 +12,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ className }) => {
         <Image
           src="/pop-art-crystals.gif"
           alt="Hero image"
-          className="dark:invert rounded-2xl"
+          className="rounded-2xl"
           layout='fill'
           objectFit="cover"
           priority
