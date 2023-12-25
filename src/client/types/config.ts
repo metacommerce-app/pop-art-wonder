@@ -4,7 +4,7 @@ export const clientConfig = {
     'Art coming soon',
   contractAddress: '0xbba45e5b08233014fa676b1cd9345e58bda2582e',
   openseaUrl: 'https://opensea.io/collection/popartwonders',
-  startDate: '2023-12-26T16:30:04.000Z',
+  startDate: '2023-12-26T17:30:04.000Z',
   endDate: '2024-01-05T17:00:05.000Z',
   twitter: {
     url: 'https://twitter.com/popartcats',
